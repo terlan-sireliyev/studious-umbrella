@@ -1,0 +1,72 @@
+<div class="flex items-center flex-col justify-center min-h-screen bg-gray-100">
+    @if (!isAtive) {
+    <form [formGroup]="addUsers" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-4 text-gray-700 text-center">Add User</h2>
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+            <input type="text" id="name" formControlName="name" placeholder="Enter full name"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-600 mb-1">Username</label>
+            <input type="text" id="username" formControlName="username" placeholder="Enter username"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <button (click)="add()" type="submit"
+            class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+            Add User
+        </button>
+    </form>
+    }
+
+    @if (isAtive) {
+    <form [formGroup]="updateForm" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-4 text-gray-700 text-center">Add User</h2>
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+            <input type="text" id="name" formControlName="name" placeholder="Enter full name"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-600 mb-1">Username</label>
+            <input type="text" id="username" formControlName="username" placeholder="Enter username"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="flex gap-2">
+            <button (click)="update()" type="submit"
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                Update User
+            </button>
+            <button (click)="cancel()" type="submit"
+                class="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">
+                Cancel
+            </button>
+        </div>
+    </form>
+    }
+
+
+   @if (this.users.length > 0) {
+    <table class="bg-white p-6 mt-2 rounded-lg shadow-lg w-full max-w-md">
+        <thead>
+            <tr class="flex gap-6 bg-gray-300  rounded-t-lg  p-2">
+                <td class="capitalize w-full font-bold">name</td>
+                <td class="capitalize w-full font-bold">username</td>
+                <td class="capitalize w-full font-bold">Action</td>
+            </tr>
+        </thead>
+        <tbody class="p-6 mt-2  rounded-lg shadow-lg w-full max-w-md">
+            @for (item of users; track $index) {
+            <tr class="flex rounded-lg">
+                <td class="capitalize w-full px-[10px] py-2">{{item.name}}</td>
+                <td class="capitalize w-full px-[10px] py-2">{{item.username}}</td>
+                <td class="capitalize w-full pl-[5px] py-2 pr-2 ">
+                    <button (click)="get(item,$index)" class="w-[50%] bg-yellow-400">Edit</button>
+                    <button (click)="del($index)" class="w-[50%] bg-red-600">Delet</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+   }
+</div>
